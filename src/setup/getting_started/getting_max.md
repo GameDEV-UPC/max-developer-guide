@@ -1,7 +1,6 @@
 # Getting Max
 
-In order to get a copy of Max on your computer, you need to have git configured
-on your computer.
+In order to get a copy of Max on your computer, you need to have git configured.
 
 > **Note:** Your GitHub account needs to be added as a developer of Max
 in order for you to be able to pull the repository.

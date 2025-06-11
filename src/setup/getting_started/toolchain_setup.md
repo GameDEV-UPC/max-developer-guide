@@ -1,8 +1,8 @@
-# Setting up the toolchain
+# Setting up the tool-chain
 
-In order to ensure a consistent developement environment accross machines, we
+In order to ensure a consistent development environment across machines, we
 use [Nix](https://nixos.org/). You can opt out of using Nix, in which case you
-can skip this section, although you will not recieve support if Max is not
+can skip this section, although you will not receive support if Max is not
 building correctly for you.
 
 ## Installing and configuring Nix
@@ -16,7 +16,7 @@ echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
 ```
 
 ## Installing and configuring direnv
-In order to automatically load the developement environment once you open the
+In order to automatically load the development environment once you open the
 Max directory, you can install [direnv](https://direnv.net/) on your system.
 
 Follow the installation instructions at [https://direnv.net/#getting-started](https://direnv.net/#getting-started).
@@ -46,6 +46,6 @@ To install the extension, follow these steps:
     If it the direnvrc file doesn't exist, you can create it.
 
 ## Trusting Max
-Direnv doesn't load developement environments unless you've told it you trust
+Direnv doesn't load development environments unless you've told it you trust
 them before. `cd` into the directory where you cloned Max and you'll see a
 message on your terminal. You can run `direnv allow` to trust the repository.

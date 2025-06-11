@@ -5,7 +5,7 @@
 - [Setting up](setup/index.md)
     - [Getting started](setup/getting_started/index.md)
         - [Getting Max](setup/getting_started/getting_max.md)
-        - [Setting up the toolchain](setup/getting_started/toolchain_setup.md)
+        - [Setting up the tool-chain](setup/getting_started/toolchain_setup.md)
     - [Building Max](setup/building/index.md)
         - [Debug build](setup/building/debug.md)
         - [Release](setup/building/release/index.md)
