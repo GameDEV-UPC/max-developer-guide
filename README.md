@@ -4,7 +4,8 @@
 > You can visit this guide at https://gamedev-upc.github.io/max-developer-guide/
 
 ## Development
-You can run a local development version of this guide with the following command
+You can run a local development version of this guide with the following
+command:
 ```bash
 mdbook serve --open
 ```
@@ -23,7 +24,7 @@ Make sure you have the en\_US dictionary installed.
 
 ### Consistency
 In order to keep editing consistent, all regular text lines must be maximum
-80 columns long, although there a few exceptions:
+80 columns long, although there are a few exceptions:
 - If a hyperlink is the last element of the line
 - If a command is the last element of the line
 - Code blocks adhere to the Max formatting standard instead
