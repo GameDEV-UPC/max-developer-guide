@@ -1,0 +1,511 @@
+<!DOCTYPE HTML>
+<html lang="en" class="coal sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Max Developer Guide</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "coal";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('coal')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Max Developer Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/GameDEV-UPC/max" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>Welcome to the Max developer guide! You can read it in a linear fashion or use
+it as a quick reference. You can use the left sidebar menu to navigate the
+different pages or the search button if you're looking for anything specific.</p>
+<p>This documentation is maintained by us, so if anything is out of date let us
+know! You can click on the <em>suggest an edit</em> button on the top right corner
+to open an issue on GitHub. Alternatively, you can tell us directly.</p>
+<blockquote>
+<p><strong>Note:</strong> If you're looking for the API reference, click here: <code>TODO API DOCS LINK</code></p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="setting-up"><a class="header" href="#setting-up">Setting up</a></h1>
+<p>The first step into contributing to Max is to set up your development
+environment to work on Max. This section goes over installing the required
+packages, getting the repository and building it.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting started</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-max"><a class="header" href="#getting-max">Getting Max</a></h1>
+<p>In order to get a copy of Max on your computer, you need to have git configured.</p>
+<blockquote>
+<p><strong>Note:</strong> Your GitHub account needs to be added as a developer of Max
+in order for you to be able to pull the repository.</p>
+</blockquote>
+<h2 id="setting-up-git"><a class="header" href="#setting-up-git">Setting up git</a></h2>
+<p>If you don't have git installed, use your package manager to install it.</p>
+<ul>
+<li>Debian, Ubuntu, Pop!OS: <code>sudo apt install git openssh-server</code></li>
+<li>Fedora, Nobara: <code>sudo dnf install git openssh-server</code></li>
+<li>Arch, Manjaro, Endeavour: <code>sudo pacman -S git openssh</code></li>
+</ul>
+<h2 id="getting-ssh-keys"><a class="header" href="#getting-ssh-keys">Getting SSH keys</a></h2>
+<p>In order to pull the Max repository from GitHub, you need to have SSH keys
+configured.</p>
+<p>If your user does not have any keys set up, you'll need to create them.
+To create a new SSH key, run <code>ssh-keygen</code>. The program will ask a bunch of
+questions, you can leave all of them blank by pressing enter.</p>
+<p>This will generate an ssh key pair found at <code>~/.ssh/</code>.</p>
+<h2 id="configuring-github-to-recognize-your-ssh-keys"><a class="header" href="#configuring-github-to-recognize-your-ssh-keys">Configuring GitHub to recognize your SSH keys</a></h2>
+<p>In order for GitHub to recognize your ssh keys as yours, you need to add them
+to your account. To do so, log into github.com and open the following link:
+<a href="https://github.com/settings/keys">https://github.com/settings/keys</a></p>
+<blockquote>
+<p>Alternatively, you can find the page through the GUI by navigating to <code>Profile  picture</code> &gt; <code>Settings</code> &gt; <code>SSH and GPG keys</code></p>
+</blockquote>
+<p>Now you can copy your public key. On a terminal, run <code>cd ~/.ssh; ls</code>. You should
+see a file finishing in <code>.pub</code> like <code>id_ed25519.pub</code> or <code>id_rsa.pub</code>. Copy the
+contents of this file by running <code>cat &lt;FILE_NAME&gt;.pub</code> and copying the output.</p>
+<p>With the public ssh key on your clipboard, click on <code>New SSH key</code> on the GitHub
+website and paste it on the <code>Key</code> text box. The title field will be
+automatically populated once you press on <code>Add SSH Key</code>, so you don't need to
+fill it.</p>
+<h2 id="pulling-the-max-repository"><a class="header" href="#pulling-the-max-repository">Pulling the Max repository</a></h2>
+<p>On a directory of your choosing, you can run <code>git clone git@github.com:GameDEV-UPC/max.git</code>
+to download the Max repository on your computer.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="setting-up-the-tool-chain"><a class="header" href="#setting-up-the-tool-chain">Setting up the tool-chain</a></h1>
+<p>In order to ensure a consistent development environment across machines, we
+use <a href="https://nixos.org/">Nix</a>. You can opt out of using Nix, in which case you
+can skip straight to <a href="setup/getting_started/toolchain_setup.html#set-up-the-formatter-for-your-editor">setting up the formatter for your editor</a>.
+Note that you will not receive support if Max is not building correctly for you.</p>
+<h2 id="installing-and-configuring-nix"><a class="header" href="#installing-and-configuring-nix">Installing and configuring Nix</a></h2>
+<p>You can find the Nix installation instructions here: <a href="https://nixos.org/download/">https://nixos.org/download/</a>.</p>
+<p>Once Nix is installed, you need to configure it to enable <a href="https://nixos.wiki/wiki/flakes">flakes</a>.
+You can do so by running the following command:</p>
+<pre><code class="language-bash">echo "experimental-features = nix-command flakes" &gt; ~/.config/nix/nix.conf
+</code></pre>
+<h2 id="installing-and-configuring-direnv"><a class="header" href="#installing-and-configuring-direnv">Installing and configuring direnv</a></h2>
+<p>In order to automatically load the development environment once you open the
+Max directory, you can install <a href="https://direnv.net/">direnv</a> on your system.</p>
+<p>Follow the installation instructions at <a href="https://direnv.net/#getting-started">https://direnv.net/#getting-started</a>.</p>
+<p>Direnv doesn't load flakes by default, but you can enable it with an extension.
+To install the extension, follow these steps:</p>
+<ul>
+<li>
+<p>If it doesn't exist, create a configuration directory for direnv:</p>
+<pre><code class="language-bash">mkdir ~/.config/direnv
+</code></pre>
+</li>
+<li>
+<p>Change directory into the direnv configuration directory:</p>
+<pre><code class="language-bash">cd ~/.config/direnv
+</code></pre>
+</li>
+<li>
+<p>Clone the extension's repository:</p>
+<pre><code class="language-bash">git clone https://github.com/nix-community/nix-direnv
+</code></pre>
+</li>
+<li>
+<p>Add the following line to the <code>direnvrc</code> file:</p>
+<pre><code class="language-bash">source $HOME/.config/direnv/nix-direnv/direnvrc
+</code></pre>
+<p>If it the direnvrc file doesn't exist, you can create it.</p>
+</li>
+</ul>
+<h2 id="trusting-max"><a class="header" href="#trusting-max">Trusting Max</a></h2>
+<p>Direnv doesn't load development environments unless you've told it you trust
+them before. <code>cd</code> into the directory where you cloned Max and you'll see a
+message on your terminal. You can run <code>direnv allow</code> to trust the repository.</p>
+<h2 id="set-up-the-formatter-for-your-editor"><a class="header" href="#set-up-the-formatter-for-your-editor">Set up the formatter for your editor</a></h2>
+<p>Max strictly adheres to the <a href="setup/getting_started/../../contributing/style/format.html">style guide</a>,
+so using a formatter is mandatory. The development environment provided by the
+Nix flake already includes the formatter, but you still have to integrate it
+with your text editor.</p>
+<h3 id="neovim"><a class="header" href="#neovim">Neovim</a></h3>
+<p>Assuming you already have the <code>nvim-lspconfig</code> and <code>ccls</code> or <code>clangd</code> plugins
+installed and configured as well as your leader key set up, you just need to
+define the shortcut:</p>
+<pre><code class="language-lua">vim.keymap.set('n', '&lt;leader&gt;f', function()
+    vim.lsp.buf.format { async = true }
+end, opts)
+</code></pre>
+<h3 id="zed"><a class="header" href="#zed">Zed</a></h3>
+<p>The zed editor integrates the formatter out of the box, the shortcut to activate
+it can be found on <a href="https://zed.dev/docs/languages/cpp#formatting">it's docs</a>.</p>
+<h3 id="visual-studio-code"><a class="header" href="#visual-studio-code">Visual Studio Code</a></h3>
+<p>There exists <a href="https://marketplace.visualstudio.com/items?itemName=xaver.clang-format">a Visual Studio Code extension</a>
+that integrates the formatter provided by the Nix flake into the editor.</p>
+<h3 id="other-editors"><a class="header" href="#other-editors">Other editors</a></h3>
+<p>If you use any other text editors let us know! We'll include the instructions
+here.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="building-max"><a class="header" href="#building-max">Building Max</a></h1>
+<p>To keep the development environment clean, builds are done on the <code>build/</code>
+directory. It doesn't come included on the repository, so you can create it
+with <code>mkdir build</code>. For the following build-related pages, it is assumed you're
+on the <code>build/</code> directory.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="debug-build"><a class="header" href="#debug-build">Debug build</a></h1>
+<p>A debug build allows you to use the <a href="setup/building/../../debugging/macros.html">debug macros</a>.</p>
+<p>To set up the build directory for a development build, run:</p>
+<pre><code class="language-bash">cmake -DMAX_DEBUG=ON ..
+</code></pre>
+<p>You can compile as usual (with <code>make</code>), but to speed up the compilation process,
+you can split the compilation tasks across threads with the <code>-j</code> flag.
+If your computer has 8 threads, the command would be: <code>make -j8</code>.</p>
+<blockquote>
+<p><strong>Note:</strong> The command <code>nproc</code> outputs your processor's thread count.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="release"><a class="header" href="#release">Release</a></h1>
+<p>Release builds don't contain any debug symbols and are more optimized, resulting
+in smaller, faster binaries. It is recommended that for distributing Max, it is
+built in release mode.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="linux"><a class="header" href="#linux">Linux</a></h1>
+<p>To set up the build directory for a release build, run:</p>
+<pre><code class="language-bash">cmake ..
+</code></pre>
+<p>To compile, run:</p>
+<pre><code class="language-bash">make
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="windows"><a class="header" href="#windows">Windows</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contributing"><a class="header" href="#contributing">Contributing</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="style-guide"><a class="header" href="#style-guide">Style guide</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="formatter"><a class="header" href="#formatter">Formatter</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="patterns"><a class="header" href="#patterns">Patterns</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="smart-pointers"><a class="header" href="#smart-pointers">Smart pointers</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="documentation"><a class="header" href="#documentation">Documentation</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="git"><a class="header" href="#git">Git</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="git-basics"><a class="header" href="#git-basics">Git basics</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="branches"><a class="header" href="#branches">Branches</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="passing-review"><a class="header" href="#passing-review">Passing review</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="legal-guidelines"><a class="header" href="#legal-guidelines">Legal guidelines</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="using-libraries"><a class="header" href="#using-libraries">Using libraries</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="copying-code"><a class="header" href="#copying-code">Copying code</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="llms"><a class="header" href="#llms">LLMs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
+<p>This following section goes over Max's architecture. But in order to understand
+Max's layout, we must first understand some key concepts.</p>
+<h2 id="what-is-a-game-engine"><a class="header" href="#what-is-a-game-engine">What is a game engine?</a></h2>
+<p>A game engine is the tool that allows game developers and artists to design and
+create video games. Think of a game engine as a black box where the inputs are
+assets and scripts and the output is a video game or application.</p>
+<blockquote>
+<p><img src="architecture/img/game_engine_black_box.svg" alt="Game engine black box" />
+The image above shows the black box with its inputs and outputs. Notice how
+there's extra tooling like a user interface that's not necessarily attached to
+the main black box.</p>
+</blockquote>
+<h2 id="components"><a class="header" href="#components">Components</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="core"><a class="header" href="#core">Core</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ui"><a class="header" href="#ui">Ui</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rendermanager"><a class="header" href="#rendermanager">RenderManager</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="inputmanager"><a class="header" href="#inputmanager">InputManager</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="physicsmanager"><a class="header" href="#physicsmanager">PhysicsManager</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="soundmanager"><a class="header" href="#soundmanager">SoundManager</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="particlemanager"><a class="header" href="#particlemanager">ParticleManager</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="assetmanager"><a class="header" href="#assetmanager">AssetManager</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="debugging"><a class="header" href="#debugging">Debugging</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="debug-macros"><a class="header" href="#debug-macros">Debug macros</a></h1>
+<p>As per the <a href="debugging/../contributing/style/index.html">style guidelines</a>, using
+<code>&lt;iostream&gt;</code> on the Max codebase is forbidden. It is for this reason that Max
+ships some debugging macros to print information to the terminal. They live
+at the <code>Debug.hpp</code> file.</p>
+<blockquote>
+<p><strong>Note:</strong> Debug macros only display the messages on <a href="debugging/../setup/building/debug.html">debug builds</a>.</p>
+</blockquote>
+<p>There are six debugging macros included with Max:</p>
+<ul>
+<li>
+<p><code>show()</code>: Prints the message unconditionally in bright purple. This macro is
+used when you want to display some information ONLY during the development
+stage and plan to remove it later.</p>
+<pre><code class="language-cpp">// my_sum_function.cpp
+int sum(int lhs, int rhs) {
+    show("The first number is ", lhs, "!");
+    return lhs + rhs;
+}
+int result = sum(2, 4);
+</code></pre>
+<p><img src="debugging/img/show_macro.svg" alt="show() macro" /></p>
+</li>
+<li>
+<p><code>trace()</code>: Used for maximum verbosity messages. Information that you generally
+wouldn't want to see, but that is useful to have if you're trying to determine
+the exact state of the engine.</p>
+<pre><code class="language-cpp">// RenderManager/shaders/DefaultShaderInv.cpp
+void DefaultShaderInv::initObject(RenderObject *renderObject) {
+    glBindVertexArray(renderObject-&gt;getVAO());
+    trace("Bound VBO: ", renderObject-&gt;getVBO()[0]);
+    glBindBuffer(GL_ARRAY_BUFFER, renderObject-&gt;getVBO()[0]);
+    // ...
+}
+</code></pre>
+<p><img src="debugging/img/trace_macro.svg" alt="trace() macro" /></p>
+</li>
+<li>
+<p><code>debug()</code>: Used for medium verbosity messages. Information that lets you track
+the general state of Max, but not granular enough to tell exactly what it's
+currently doing.</p>
+<pre><code class="language-cpp">// InputManager/InputManager.cpp
+MXbool InputManager::isJoistickConnected() {
+    MXbool connected = glfwJoystickPresent(GLFW_JOYSTICK_1) == GLFW_TRUE;
+    if (connected) debug("Joystick connected.");
+    return connected;
+}
+</code></pre>
+<p><img src="debugging/img/debug_macro.svg" alt="debug() macro" /></p>
+</li>
+<li>
+<p><code>info()</code>: Used for information you always want to have.</p>
+<pre><code class="language-cpp">// EngineLogic/MaxBuilder.cpp
+Max MaxBuilder::build() {
+    // ...
+    Input = new InputManager();
+    Camera *camera = new Camera(_screen_width, _screen_height);
+    Render = new RenderManager(_screen_width, _screen_height, camera);
+    Max max(_camera, _scene, _window);
+
+    info("New Max instance created.");
+    return max
+}
+</code></pre>
+<p><img src="debugging/img/info_macro.svg" alt="info() macro" /></p>
+</li>
+<li>
+<p><code>warn()</code>: Used to indicate something went wrong, but that it is not a critical
+issue and the engine can recover from it.</p>
+<pre><code class="language-cpp">// RenderManager/ModelLoader.cpp
+ModelObject *ModelLoader::create_model_object(std::string name, const MXchar *model_src) {
+    Assimp::Importer importer;
+    const aiScene *scene = importer.ReadFile(
+        model_src, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_PreTransformVertices | aiProcess_GenNormals);
+
+    if (!scene || scene-&gt;mFlags &amp; AI_SCENE_FLAGS_INCOMPLETE || !scene-&gt;mRootNode) {
+        warn("File ", model_src, " does not contain a model!");
+        // ...
+    }
+    // ...
+}
+</code></pre>
+<p><img src="debugging/img/warn_macro.svg" alt="warn() macro" /></p>
+</li>
+<li>
+<p><code>error()</code>: Used for critical errors the engine cannot recover from, and most
+likely result in a crash.</p>
+<pre><code class="language-cpp">// EngineLogic/MaxBuilder.cpp
+Max MaxBuilder::build() {
+    // ...
+
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        error("GLAD failed to initialize");
+        throw BuildExeption(Cause::Faliure, Item::Internal);
+    }
+
+    // ...
+}
+</code></pre>
+<p><img src="debugging/img/error_macro.svg" alt="error() macro" /></p>
+</li>
+</ul>
+<p>As you will have noticed, their structure is: <code>DEBUG_LEVEL [file_name:function_name:line_number] user message</code>.</p>
+<p>Besides <code>show()</code>, debug macro messages will not be displayed by default, even on
+debug builds. They have to be enabled through the <code>LOG_LEVEL</code> environment
+variable.</p>
+<p>The levels correspond to the macro names, and are ordered from least
+to most verbosity in the following list: <code>ERROR &lt; WARN &lt; INFO &lt; DEBUG &lt; TRACE</code>.
+Enabling a debug level automatically enables all the previous ones on the list.</p>
+<p><code>LOG_LEVEL=INFO ./my_max_game</code> Will show ERROR, WARN and DEBUG messages.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="profiling"><a class="header" href="#profiling">Profiling</a></h1>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
