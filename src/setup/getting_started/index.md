@@ -1,1 +1,1 @@
-# Walktrought
+# Getting started
