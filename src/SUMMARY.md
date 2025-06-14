@@ -13,7 +13,7 @@
             - [Windows](setup/building/release/windows.md)
 - [Contributing](contributing/index.md)
     - [Style guide](contributing/style/index.md)
-        - [Formatter](contributing/style/formatter.md)
+        - [Formatter](contributing/style/format.md)
         - [Patterns](contributing/style/patterns.md)
         - [Smart pointers](contributing/style/smart_pointers.md)
         - [Documentation](contributing/style/documentation.md)
