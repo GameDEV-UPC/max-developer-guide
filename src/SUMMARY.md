@@ -26,6 +26,7 @@
         - [Copying code](contributing/legal/copying.md)
         - [LLMs](contributing/legal/llms.md)
 - [Architecture](architecture/index.md)
+    - [Getting started](architecture/getting-started.md)
     - [Core](architecture/core.md)
     - [Ui](architecture/ui.md)
     - [RenderManager](architecture/rendermanager.md)
